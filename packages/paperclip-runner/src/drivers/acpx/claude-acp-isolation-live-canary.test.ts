@@ -87,6 +87,9 @@ describe.skipIf(!LIVE)(
     let capturedInit: any;
     let assistantText: string;
     const tempDirs: string[] = [];
+    const originalIsolatedContext = process.env.PAPERCLIP_ACPX_ISOLATED_CONTEXT;
+    const originalTaskToolBridgeUrl =
+      process.env.PAPERCLIP_ACPX_TASK_TOOL_BRIDGE_URL;
 
     beforeAll(async () => {
       const requireFromTest = createRequire(import.meta.url);
@@ -120,6 +123,17 @@ describe.skipIf(!LIVE)(
     });
 
     afterAll(async () => {
+      if (originalIsolatedContext === undefined) {
+        delete process.env.PAPERCLIP_ACPX_ISOLATED_CONTEXT;
+      } else {
+        process.env.PAPERCLIP_ACPX_ISOLATED_CONTEXT = originalIsolatedContext;
+      }
+      if (originalTaskToolBridgeUrl === undefined) {
+        delete process.env.PAPERCLIP_ACPX_TASK_TOOL_BRIDGE_URL;
+      } else {
+        process.env.PAPERCLIP_ACPX_TASK_TOOL_BRIDGE_URL =
+          originalTaskToolBridgeUrl;
+      }
       await Promise.all(
         tempDirs.map((dir) => rm(dir, { recursive: true, force: true })),
       );

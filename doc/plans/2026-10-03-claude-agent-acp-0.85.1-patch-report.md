@@ -1,7 +1,13 @@
 # Re-port the claude-agent-acp isolation patch to 0.85.1
 
 Date: 2026-10-03
-Status: research and plan only. Nothing has been implemented.
+Status: implemented. The re-port, the 0.85.1 bump, and the three verification
+layers described in this plan's Verification section (options-capture vitest,
+the installation-integrity check, and the opt-in live canary at
+`packages/paperclip-runner/src/drivers/acpx/claude-acp-isolation-live-canary.test.ts`)
+have shipped. The "Open questions" section below was not fully re-resolved
+against the shipped state — treat answers there as still open unless a
+follow-up confirms them.
 Scope: move `@agentclientprotocol/claude-agent-acp` from 0.73.0 to 0.85.1 and
 carry forward `patches/@agentclientprotocol__claude-agent-acp@0.73.0.patch`.
 
